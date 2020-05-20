@@ -145,5 +145,5 @@ def get_nominate_data_v2():
 
 
 if __name__ == '__main__':
-    d = get_nominate_data()
+    d = get_nominate_data_v2()
     print(d)
