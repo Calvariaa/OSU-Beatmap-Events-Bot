@@ -85,11 +85,14 @@ def get_nominate_data_v2():
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, 'lxml')
     jshtml = (soup.find(id="json-events")).string.lstrip()
+    jschecker = (soup.find(id="json-users")).string.lstrip()
     nominate_data = []
 
     #print(type(jshtml))
     #print (jshtml)
     mapjson = json.loads(jshtml)
+    mapchecker = json.loads(jschecker)
+
     #print(mapjson[1])
 
     for mapnow in mapjson:
@@ -97,7 +100,7 @@ def get_nominate_data_v2():
 
         mapurl = 'https://osu.ppy.sh/beatmapsets/' + str(mapnow['beatmapset']['id'])
         mapstatus = "null"
-        if  mapnow == 1:
+        if mapnow['type'] == 'rank':
             mapstatus = "ranked"
         if mapnow['type'] == 'love':
             mapstatus = "loved"
@@ -105,7 +108,7 @@ def get_nominate_data_v2():
             mapstatus = "qualify"
         if mapnow['type'] == 'nominate':
             mapstatus = "nominate"
-        if mapnow['type'] == 'nomination-reset':
+        if mapnow['type'] == 'nomination_reset':
             mapstatus = "nomination-reset"
         if mapnow['type'] == 'disqualify':
             mapstatus = "disqualify"
@@ -116,8 +119,15 @@ def get_nominate_data_v2():
         time = mapnow['created_at']
 
         info = ''
-        if ('discussion' in mapnow):
-            info = mapnow['discussion']['starting_post']['message']
+        if ('user_id' in mapnow):
+            for checkerid in mapchecker:
+                if checkerid['id'] == mapnow['user_id']:
+                    if mapstatus == "nominate":
+                        info = 'Nominated by ' + checkerid['username'] + '.'
+                    if mapstatus == "disqualify":
+                        info = 'Disqualified by ' + checkerid['username'] + '.'
+                        if ('discussion' in mapnow):
+                            info += '\n' + mapnow['discussion']['starting_post']['message']
 
         data = {}
         data["mapurl"] = mapurl

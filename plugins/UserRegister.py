@@ -16,13 +16,6 @@ async def _(session: CommandSession):
     print(session.ctx)
     await session.send("订阅看实时飞图状态和取消订阅，订阅-sub_MODE，取消订阅-unsub，谢谢合作。\n ps:MODE可选：std,ctb,taiko,mania")
 
-
-@on_command('sub_update',only_to_me=False)
-async def _(session: CommandSession):
-    update_map_status()
-    print(session.ctx)
-    await session.send("正在尝试更新")
-
 @on_command('sub_std',only_to_me=False)
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
