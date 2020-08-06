@@ -20,7 +20,7 @@ async def _(session: CommandSession):
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
 #    mode = session.get()
-	
+
     if session.ctx['message_type'] == 'group' and session.ctx['group_id'] in list['group']['std']:
         await session.send('本群已经订阅！')
         return
@@ -34,7 +34,7 @@ async def _(session: CommandSession):
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
 #    mode = session.get()
-	
+
     if session.ctx['message_type'] == 'group' and session.ctx['group_id'] in list['group']['ctb']:
         await session.send('本群已经订阅！')
         return
@@ -48,7 +48,7 @@ async def _(session: CommandSession):
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
 #    mode = session.get()
-	
+
     if session.ctx['message_type'] == 'group' and session.ctx['group_id'] in list['group']['mania']:
         await session.send('本群已经订阅！')
         return
@@ -62,7 +62,7 @@ async def _(session: CommandSession):
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
 #    mode = session.get()
-	
+
     if session.ctx['message_type'] == 'group' and session.ctx['group_id'] in list['group']['taiko']:
         await session.send('本群已经订阅！')
         return
@@ -76,7 +76,7 @@ async def _(session: CommandSession):
 async def _(session: CommandSession):
     list = plugins.getUser.getUsers()
 #    mode = session.get()
-	
+
     if session.ctx['message_type'] == 'group' and session.ctx['group_id'] in list['group']['mapping']:
         await session.send('本群已经订阅！')
         return
