@@ -129,7 +129,7 @@ async def update_map_status():
                     except CQHttpError:
                         pass
             
-    with open('./mapdata.json', "r+") as f:
+    with open('../mapdata.json', "r+") as f:
         read_data = f.read()
         f.seek(0)
         f.truncate()
