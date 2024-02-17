@@ -1,0 +1,5 @@
+beautifulsoup4~=4.12.3
+SocksiPy_branch
+lxml
+
+APScheduler~=3.10.4
