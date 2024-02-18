@@ -341,3 +341,5 @@ healthchecksdb
 
 #config
 config.py
+mapdata.json
+users.json

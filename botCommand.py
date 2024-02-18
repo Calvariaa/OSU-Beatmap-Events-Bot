@@ -1,7 +1,7 @@
 from satori import Event
 from satori.client import Account
 
-from config import app, BOTACCOUNT
+from config import app
 from botScheduler import *
 
 from config import COMMAND_START

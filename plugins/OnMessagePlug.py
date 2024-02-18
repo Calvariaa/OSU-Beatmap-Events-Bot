@@ -1,9 +1,8 @@
 import asyncio
 import json
-import time
 import random
 
-from config import app, BOTACCOUNT
+from config import app
 
 from plugins import getData
 from plugins import getUser
@@ -11,56 +10,14 @@ from plugins import getUser
 from botScheduler import *
 
 
-def text_obfuscate(data):
-    """
-    滚你妈的腾讯,SB
-
-    :param data:
-    :return:
-    """
-    enum = {
-        'a': ['a', 'à', 'á', 'â', 'ã', 'ä', 'å', 'ɑ', 'а', 'ạ'],
-        'b': ['b', 'ʙ', 'Ь', 'ｂ'],
-        'c': ['c', 'ϲ', 'с', 'ⅽ', 'ƈ', 'ċ', 'ć'],
-        'd': ['d', 'cl', 'd', 'ԁ', 'ժ', 'ⅾ', 'ｄ', 'ɗ'],
-        'e': ['e', 'é', 'ê', 'ë', 'ē', 'ĕ', 'ė', 'ｅ', 'е', 'ẹ', 'ę'],
-        'f': ['f', 'Ϝ', 'Ｆ', 'ｆ'],
-        'g': ['g', 'ɢ', 'ɡ', 'Ԍ', 'Ԍ', 'ｇ', 'ġ'],
-        'h': ['h', 'һ', 'ｈ'],
-        'i': ['i', '1', 'l', 'Ꭵ', 'ⅰ', 'ｉ', 'í', 'ï'],
-        'j': ['j', 'ј', 'ｊ', 'ʝ'],
-        'k': ['k', 'lc', 'κ', 'ｋ'],
-        'l': ['l', '1', 'i', 'ⅼ', 'ｌ'],
-        'm': ['m', 'nn', 'rn', 'rr', 'ṃ', 'ⅿ', 'ｍ'],
-        'n': ['n', 'r1', 'ｎ', 'ń'],
-        'o': ['o', '0', 'Ο', 'ο', 'О', 'о', 'Օ', 'Ｏ', 'ｏ', 'ȯ', 'ọ', 'ỏ', 'ơ', 'ó'],
-        'p': ['p', 'ρ', 'р', 'ｐ'],
-        'q': ['q', 'ｑ', 'զ'],
-        'r': ['r', 'ʀ', 'ｒ'],
-        's': ['s', 'Ⴝ', 'Ꮪ', 'Ｓ', 'ｓ', 'ʂ', 'ś'],
-        't': ['t', 'τ', 'ｔ'],
-        'u': ['u', 'μ', 'υ', 'Ս', 'Ｕ', 'ｕ', 'ս'],
-        'v': ['v', 'ｖ', 'ѵ', 'ⅴ', 'ν'],
-        'w': ['w', 'vv', 'ѡ', 'ｗ'],
-        'x': ['x', 'ⅹ', 'ｘ', 'х', 'ҳ'],
-        'y': ['y', 'ʏ', 'γ', 'у', 'Ү', 'ｙ', 'ý'],
-        'z': ['z', 'ｚ', 'ʐ', 'ż', 'ź', 'ʐ'],
-        '/': ['丿', '/', '|'],
-        '.': ['。', ',', '、']
-    }
-    for letter in enum:
-        data = data.replace(letter, enum[letter][random.randint(0, len(enum[letter]) - 1)])
-    return data
-
-
 def data_to_string(data):
     s = ''
     if data['mapstatus'] == 'ranked':
-        s += '♾️ (Ranked)'
+        s += '⏫ (Ranked)'
     if data['mapstatus'] == 'loved':
         s += '❤️ (Loved)'
     if data['mapstatus'] == 'qualify':
-        s += '✔️ (Qualified)'
+        s += '✅ (Qualified)'
     if data['mapstatus'] == 'nominate':
         s += '💭 (Nominated)'
     if data['mapstatus'] == 'nomination-reset':
@@ -106,7 +63,7 @@ async def _():
 
 
 async def update_map_status():
-    account = app.get_account("chronocat/{}".format(BOTACCOUNT))
+    account = list(app.accounts.values())[0]
     try:
         with open('mapdata.json', 'r') as map_data:
             old_data = map_data.read()
@@ -114,7 +71,7 @@ async def update_map_status():
     except Exception as e:
         old_data = []
 
-    user_list = getUser.getUsers()
+    user_list = getUser.get_users()
     groups_std = user_list['group']['std']
     groups_ctb = user_list['group']['ctb']
     groups_mania = user_list['group']['mania']

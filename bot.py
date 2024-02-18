@@ -1,3 +1,6 @@
+import os
+import json
+
 from config import app
 
 from satori import Event
@@ -9,21 +12,15 @@ import plugins
 async def listen(account: Account, event: Event):
     print(account, event)
 
+if __name__ == '__main__':
+    if not os.path.exists('mapdata.json'):
+        with open('mapdata.json', 'w') as f:
+            new_data = []  # 新數據
+            f.write(json.dumps(new_data))
 
-#
-#     if event.user.id == "1764203060" and str(event.message.content[0]) == "test":
-#         await my_job()
-#         await account.session.send_message(
-#             event.channel.id,
-#             "Hep!",
-#         )
+    if not os.path.exists('users.json'):
+        with open('users.json', 'w') as f:
+            new_data = {"group": {"std": [], "ctb": [], "mania": [], "taiko": [], "mapping": []}}
+            f.write(json.dumps(new_data))
 
-
-# @scheduler.scheduled_job('interval', minutes=1)
-# async def my_job():
-#     print("run my_job")
-#     account = app.get_account("chronocat/{}".format(BOTACCOUNT))
-#     await account.session.send_message(channel="897380826", message="Bek")
-
-
-app.run()
+    app.run()

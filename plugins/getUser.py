@@ -1,7 +1,7 @@
 import json
 
 
-def getUsers():
+def get_users():
     f = open('users.json', 'r')
     users = f.read()
     data = json.loads(users)
@@ -9,7 +9,7 @@ def getUsers():
     return data
 
 
-def saveUsers(list):
+def save_users(list):
     with open('users.json', "r+") as f:
         read_data = f.read()
         f.seek(0)

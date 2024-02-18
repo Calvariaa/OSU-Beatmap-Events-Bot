@@ -39,7 +39,7 @@ async def _(account: Account, event: Event):
 
 @on_command('sub_std')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     if event.channel is not None and event.channel.id in list['group']['std']:
@@ -49,12 +49,12 @@ async def _(account: Account, event: Event):
     if event.channel is not None and event.channel.id not in list['group']['std']:
         list['group']['std'].append(event.channel.id)
         await account.session.send_message(event.channel.id, '订阅成功！')
-        plugins.getUser.saveUsers(list)
+        plugins.getUser.save_users(list)
 
 
 @on_command('sub_ctb')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     if event.channel is not None and event.channel.id in list['group']['ctb']:
@@ -64,12 +64,12 @@ async def _(account: Account, event: Event):
     if event.channel is not None and event.channel.id not in list['group']['ctb']:
         list['group']['ctb'].append(event.channel.id)
         await account.session.send_message(event.channel.id, '订阅成功！')
-        plugins.getUser.saveUsers(list)
+        plugins.getUser.save_users(list)
 
 
 @on_command('sub_mania')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     if event.channel is not None and event.channel.id in list['group']['mania']:
@@ -79,12 +79,12 @@ async def _(account: Account, event: Event):
     if event.channel is not None and event.channel.id not in list['group']['mania']:
         list['group']['mania'].append(event.channel.id)
         await account.session.send_message(event.channel.id, '订阅成功！')
-        plugins.getUser.saveUsers(list)
+        plugins.getUser.save_users(list)
 
 
 @on_command('sub_taiko')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     if event.channel is not None and event.channel.id in list['group']['taiko']:
@@ -94,12 +94,12 @@ async def _(account: Account, event: Event):
     if event.channel is not None and event.channel.id not in list['group']['taiko']:
         list['group']['taiko'].append(event.channel.id)
         await account.session.send_message(event.channel.id, '订阅成功！')
-        plugins.getUser.saveUsers(list)
+        plugins.getUser.save_users(list)
 
 
 @on_command('sub_mapping')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     if event.channel is not None and event.channel.id in list['group']['mapping']:
@@ -109,12 +109,12 @@ async def _(account: Account, event: Event):
     if event.channel is not None and event.channel.id not in list['group']['mapping']:
         list['group']['mapping'].append(event.channel.id)
         await account.session.send_message(event.channel.id, '订阅成功！')
-        plugins.getUser.saveUsers(list)
+        plugins.getUser.save_users(list)
 
 
 @on_command('sub_all')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
     #    mode = session.get()
 
     sendstr = ''
@@ -144,14 +144,14 @@ async def _(account: Account, event: Event):
         sendstr += 'taiko订阅成功！'
 
     await account.session.send_message(event.channel.id, sendstr)
-    plugins.getUser.saveUsers(list)
+    plugins.getUser.save_users(list)
 
 
 # unsub
 
 @on_command('unsub')
 async def _(account: Account, event: Event):
-    list = plugins.getUser.getUsers()
+    list = plugins.getUser.get_users()
 
     sendstr = ''
     if event.channel is not None and event.channel.id not in list['group']['std']:
@@ -186,4 +186,4 @@ async def _(account: Account, event: Event):
 
     await account.session.send_message(event.channel.id, sendstr)
 
-    plugins.getUser.saveUsers(list)
+    plugins.getUser.save_users(list)
