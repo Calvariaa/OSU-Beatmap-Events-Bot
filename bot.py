@@ -14,6 +14,7 @@ from plugins.SendMapDataToGroup import update_map_status
 @app.register
 async def listen(account: Account, event: Event):
     print(account, event)
+    print('')
 
 
 @scheduler.scheduled_job('interval', minutes=10)
