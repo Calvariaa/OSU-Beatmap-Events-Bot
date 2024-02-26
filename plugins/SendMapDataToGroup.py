@@ -57,7 +57,7 @@ def if_existed(data, old_data):
     return False
 
 
-@scheduler.scheduled_job('interval', minutes=15)
+@scheduler.scheduled_job('interval', minutes=10)
 async def _():
     await update_map_status()
 
@@ -100,7 +100,7 @@ async def update_map_status():
             mode_mania = int(m / 8)
 
             mode_mapping = 0
-            if d['mapstatus'] != 'ranked' and d['mapstatus'] != 'loved':
+            if d['mapstatus'] != 'ranked' and d['mapstatus'] != 'loved' and d['mapstatus'] != 'qualify':
                 mode_mapping = 1
 
             await asyncio.sleep(5)
