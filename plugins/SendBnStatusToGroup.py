@@ -91,7 +91,7 @@ def if_existed(data, old_data):
     # return False
 
 
-@scheduler.scheduled_job('interval', minutes=1)
+@scheduler.scheduled_job('interval', minutes=15)
 async def _():
     await update_bn_status()
 
