@@ -1,6 +1,7 @@
 import asyncio
 import json
 import random
+from datetime import datetime
 
 from config import app
 
@@ -53,12 +54,15 @@ def user_to_string(user):
         s += ' 🎹'
     s += " {}: {}\n".format(user['groups'].upper(), user['username'])
 
-    s += "LastOpen: {}\n".format(user['lastOpenedForRequests'])
-    s += "Status: {}\n".format(str(user['requestStatus']))
-    s += "Profile: https://osu.ppy.sh/users/{}\n".format(user['username'])
+    datetime_obj = datetime.strptime(user['lastOpenedForRequests'], "%Y-%m-%dT%H:%M:%S.%fZ")
+    formatted_time = datetime_obj.strftime("%Y-%m-%d %H:%M:%S")
+    s += "LastOpen: \n - {}\n".format(str(formatted_time))
+
+    s += "Status: \n - {}\n".format(str(user['requestStatus']))
+    s += "Profile: \n - https://osu.ppy.sh/users/{}\n".format(user['username'])
 
     if "requestLink" in user and user['requestLink'] is not None:
-        s += "ReqLink: {}\n".format(user['requestLink'])
+        s += "ReqLink: \n - {}".format(user['requestLink'])
 
     if "requestInfo" in user:
         request_info = str(user['requestInfo'])
@@ -71,7 +75,7 @@ def user_to_string(user):
             if len(lines) > 3:
                 s += "  ...\n"
 
-    s += "\nBnSite: https://bn.mappersguild.com/modrequests?id={}\n".format(user['id'])
+    s += "\nBnSite: \n - https://bn.mappersguild.com/modrequests?id={}".format(user['id'])
 
     return s
 
