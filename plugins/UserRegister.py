@@ -1,8 +1,8 @@
 from satori import Event
 from satori.client import Account
 
-from plugins.OnMessagePlug import update_map_status
-import plugins.getUser
+from plugins.SendMapDataToGroup import update_map_status
+import plugins.GetBotUsers
 
 from botCommand import on_command
 

@@ -12,15 +12,37 @@ import plugins
 async def listen(account: Account, event: Event):
     print(account, event)
 
+
 if __name__ == '__main__':
     if not os.path.exists('mapdata.json'):
         with open('mapdata.json', 'w') as f:
             new_data = []  # 新數據
             f.write(json.dumps(new_data))
 
+    if not os.path.exists('bnstatus.json'):
+        with open('bnstatus.json', 'w') as f:
+            new_data = []  # 新數據
+            f.write(json.dumps(new_data))
+
     if not os.path.exists('users.json'):
         with open('users.json', 'w') as f:
-            new_data = {"group": {"std": [], "ctb": [], "mania": [], "taiko": [], "mapping": []}}
+            new_data = {
+                "group":
+                    {
+                        "std": [],
+                        "ctb": [],
+                        "mania": [],
+                        "taiko": [],
+                        "mapping": [],
+                        "bn":
+                            {
+                                "std": [],
+                                "ctb": [],
+                                "mania": [],
+                                "taiko": []
+                            }
+                    }
+            }
             f.write(json.dumps(new_data))
 
     app.run()

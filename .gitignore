@@ -343,3 +343,4 @@ healthchecksdb
 config.py
 mapdata.json
 users.json
+bnstatus.json

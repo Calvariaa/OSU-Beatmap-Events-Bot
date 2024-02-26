@@ -4,8 +4,8 @@ import random
 
 from config import app
 
-from plugins import getData
-from plugins import getUser
+from plugins.GetMapData import get_nominate_data_v2
+from plugins.GetBotUsers import get_users
 
 from botScheduler import *
 
@@ -71,14 +71,14 @@ async def update_map_status():
     except Exception as e:
         old_data = []
 
-    user_list = getUser.get_users()
+    user_list = get_users()
     groups_std = user_list['group']['std']
     groups_ctb = user_list['group']['ctb']
     groups_mania = user_list['group']['mania']
     groups_taiko = user_list['group']['taiko']
     groups_mapping = user_list['group']['mapping']
 
-    new_data = getData.get_nominate_data_v2()
+    new_data = get_nominate_data_v2()
 
     remove_list = []
     for d in new_data:
@@ -100,7 +100,7 @@ async def update_map_status():
             mode_mania = int(m / 8)
 
             mode_mapping = 0
-            if not d['mapstatus'] == 'ranked':
+            if d['mapstatus'] != 'ranked' and d['mapstatus'] != 'loved':
                 mode_mapping = 1
 
             await asyncio.sleep(5)
@@ -108,26 +108,31 @@ async def update_map_status():
             if mode_mapping == 1:
                 for group in groups_mapping:
                     await asyncio.sleep(1)
+                    print("Send {} to Group {}".format(str(d), group))
                     await account.session.send_message(channel=group, message=data_to_string(d))
             else:
                 if mode_std != 0:
                     for group in groups_std:
                         await asyncio.sleep(1)
+                        print("Send {} to Group {}".format(str(d), group))
                         await account.session.send_message(channel=group, message=data_to_string(d))
 
                 if mode_ctb != 0:
                     for group in groups_ctb:
                         await asyncio.sleep(1)
+                        print("Send {} to Group {}".format(str(d), group))
                         await account.session.send_message(channel=group, message=data_to_string(d))
 
                 if mode_mania != 0:
                     for group in groups_mania:
                         await asyncio.sleep(1)
+                        print("Send {} to Group {}".format(str(d), group))
                         await account.session.send_message(channel=group, message=data_to_string(d))
 
                 if mode_taiko != 0:
                     for group in groups_taiko:
                         await asyncio.sleep(1)
+                        print("Send {} to Group {}".format(str(d), group))
                         await account.session.send_message(channel=group, message=data_to_string(d))
 
     with open('mapdata.json', "r+") as f:
