@@ -1,16 +1,25 @@
 import os
 import json
 
+from botScheduler import *
 from config import app
 
 from satori import Event
 from satori.client import Account
 import plugins
+from plugins.SendBnStatusToGroup import update_bn_status
+from plugins.SendMapDataToGroup import update_map_status
 
 
 @app.register
 async def listen(account: Account, event: Event):
     print(account, event)
+
+
+@scheduler.scheduled_job('interval', minutes=10)
+async def _():
+    await update_map_status()
+    await update_bn_status()
 
 
 if __name__ == '__main__':

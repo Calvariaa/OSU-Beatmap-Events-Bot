@@ -1,6 +1,6 @@
 import asyncio
 import json
-import random
+
 from datetime import datetime
 
 from config import app
@@ -8,7 +8,6 @@ from config import app
 from plugins.GetBnStatus import get_bn_status
 from plugins.GetBotUsers import get_users
 
-from botScheduler import *
 
 json_file = "bnstatus.json"
 
@@ -93,11 +92,6 @@ def if_existed(data, old_data):
     #         continue
     #     return True
     # return False
-
-
-@scheduler.scheduled_job('interval', minutes=10)
-async def _():
-    await update_bn_status()
 
 
 async def update_bn_status():

@@ -7,7 +7,6 @@ from config import app
 from plugins.GetMapData import get_nominate_data_v2
 from plugins.GetBotUsers import get_users
 
-from botScheduler import *
 
 
 def data_to_string(data):
@@ -55,11 +54,6 @@ def if_existed(data, old_data):
             continue
         return True
     return False
-
-
-@scheduler.scheduled_job('interval', minutes=10)
-async def _():
-    await update_map_status()
 
 
 async def update_map_status():
