@@ -95,6 +95,7 @@ def if_existed(data, old_data):
 
 
 async def update_bn_status():
+    print("update_bn_status")
     account = list(app.accounts.values())[0]
     try:
         with open(json_file, 'r') as map_data:

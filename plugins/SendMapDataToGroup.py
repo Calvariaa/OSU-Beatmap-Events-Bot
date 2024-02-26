@@ -57,6 +57,7 @@ def if_existed(data, old_data):
 
 
 async def update_map_status():
+    print("update_map_status")
     account = list(app.accounts.values())[0]
     try:
         with open('mapdata.json', 'r') as map_data:
