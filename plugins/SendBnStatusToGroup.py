@@ -1,13 +1,12 @@
 import asyncio
 import json
 
-from datetime import datetime
+import datetime
 
 from config import app
 
 from plugins.GetBnStatus import get_bn_status
 from plugins.GetBotUsers import get_users
-
 
 json_file = "bnstatus.json"
 
@@ -53,7 +52,8 @@ def user_to_string(user):
         s += ' 🎹'
     s += " {}: {}\n".format(user['groups'].upper(), user['username'])
 
-    datetime_obj = datetime.strptime(user['lastOpenedForRequests'], "%Y-%m-%dT%H:%M:%S.%fZ")
+    datetime_obj = (datetime.datetime.strptime(user['lastOpenedForRequests'], "%Y-%m-%dT%H:%M:%S.%fZ")
+                    + datetime.timedelta(hours=8))
     formatted_time = datetime_obj.strftime("%Y-%m-%d %H:%M:%S")
     s += "LastOpen: \n - {}\n".format(str(formatted_time))
 
@@ -61,7 +61,7 @@ def user_to_string(user):
     s += "Profile: \n - https://osu.ppy.sh/users/{}\n".format(user['username'])
 
     if "requestLink" in user and user['requestLink'] is not None:
-        s += "ReqLink: \n - {}".format(user['requestLink'])
+        s += "ReqLink: \n - {}\n".format(user['requestLink'])
 
     if "requestInfo" in user:
         request_info = str(user['requestInfo'])
