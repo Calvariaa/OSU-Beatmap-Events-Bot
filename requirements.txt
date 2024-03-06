@@ -3,3 +3,4 @@ SocksiPy_branch
 lxml
 APScheduler
 satori-python
+PySocks

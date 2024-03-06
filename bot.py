@@ -10,6 +10,13 @@ import plugins
 from plugins.SendBnStatusToGroup import update_bn_status
 from plugins.SendMapDataToGroup import update_map_status
 
+import socket
+import socks
+
+socks.set_default_proxy(socks.HTTP, addr='127.0.0.1', port=7897)
+socket.socket = socks.socksocket
+socket.setdefaulttimeout(120)
+
 
 @app.register
 async def listen(account: Account, event: Event):

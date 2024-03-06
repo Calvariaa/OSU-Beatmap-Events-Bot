@@ -2,12 +2,6 @@ from time import sleep
 from bs4 import BeautifulSoup
 import urllib.request
 import json
-# import socket
-# import socks
-#
-# # socks.set_default_proxy(socks.HTTP, addr='127.0.0.1', port=7890)
-# # socket.socket = socks.socksocket
-# socket.setdefaulttimeout(120)
 
 
 def check_modes(url):
