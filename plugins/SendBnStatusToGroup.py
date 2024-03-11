@@ -58,7 +58,7 @@ def user_to_string(user):
     s += "LastOpen: \n - {}\n".format(str(formatted_time))
 
     s += "Status: \n - {}\n".format(str(user['requestStatus']))
-    s += "Profile: \n - https://osu.ppy.sh/users/{}\n".format(user['username'])
+    s += "Profile: \n - https://osu.ppy.sh/users/{}\n".format(user['username'].replace(" ", "%20"))
 
     if "requestLink" in user and user['requestLink'] is not None:
         s += "ReqLink: \n - {}\n".format(user['requestLink'])
